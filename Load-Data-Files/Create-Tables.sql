@@ -15,7 +15,7 @@ CREATE TABLE  company (
           package int,
           onsite BOOLEAN NOT NULL,
           PRIMARY KEY (Job_id),
-          CONSTRAINT C1 FOREIGN KEY (company_id) REFERENCES company(company_id)
+          CONSTRAINT C1 FOREIGN KEY (company_id) REFERENCES company(company_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Students(
@@ -40,8 +40,8 @@ CREATE TABLE  requirements (
           backlogs int,
           branch VARCHAR(30) NOT NULL,
           PRIMARY KEY (Job_id),
-          CONSTRAINT C2 FOREIGN KEY (Job_id) REFERENCES Jobs(Job_id),
-          CONSTRAINT C3 FOREIGN KEY (branch) REFERENCES basic_requirements_branch (branch)
+          CONSTRAINT C2 FOREIGN KEY (Job_id) REFERENCES Jobs(Job_id) ON DELETE CASCADE,
+          CONSTRAINT C3 FOREIGN KEY (branch) REFERENCES basic_requirements_branch (branch) ON DELETE CASCADE
 );
 
 
@@ -51,8 +51,8 @@ CREATE Table job_application(
         interview_schedule DATE,
         status VARCHAR(255) ,
         PRIMARY KEY(Job_id,roll_no),
-        CONSTRAINT C5 FOREIGN KEY (Job_id) REFERENCES Jobs(Job_id),
-        CONSTRAINT C6 FOREIGN KEY (roll_no) REFERENCES Students(roll_no)
+        CONSTRAINT C5 FOREIGN KEY (Job_id) REFERENCES Jobs(Job_id) ON DELETE CASCADE,
+        CONSTRAINT C6 FOREIGN KEY (roll_no) REFERENCES Students(roll_no) ON DELETE CASCADE
 );
 
 
@@ -68,6 +68,6 @@ CREATE TABLE courses_completed(
         course_id int NOT NULL,
         grade VARCHAR(30),
         PRIMARY KEY(roll_no,course_id),
-        CONSTRAINT C7 FOREIGN KEY (course_id) REFERENCES courses,
-        CONSTRAINT C8 FOREIGN KEY (roll_no) REFERENCES    Students
+        CONSTRAINT C7 FOREIGN KEY (course_id) REFERENCES courses ON DELETE CASCADE,
+        CONSTRAINT C8 FOREIGN KEY (roll_no) REFERENCES    Students ON DELETE CASCADE
 );
